@@ -6,7 +6,7 @@
     </div>
     <div class="line">
       <label>密码</label>
-      <el-input type="password" placeholder="请输入密码" v-model="password"></el-input>
+      <el-input type="password" placeholder="请输入密码" v-model="password" @keyup.enter="$emit('logon',{username,password})"></el-input>
     </div>
     <div class="line btn-block">
       <el-button class="btn btn-normal" @click="$emit('closePopUp')">取消</el-button>

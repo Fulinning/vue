@@ -14,7 +14,7 @@
           <div v-for="(subItem,i) in resume[item.field]" class="block">
             <div v-for="(value,key) in subItem" class="line">
               <label>{{$t(`${item.field}.${key}`)}}</label>
-              <el-input @input="inputResume(`${item.field}.${i}.${key}`,$event)" placeholder="请输入内容" :value="resume[item.field][i][key]" @focus="loginOrNot()" @blur="$store.dispatch('saveResume')" ></el-input>              
+              <el-input @input="inputResume(`${item.field}.${i}.${key}`,$event)" placeholder="请输入内容" :value="resume[item.field][i][key]" @focus="loginOrNot()" @blur="saveResume()"></el-input>              
             </div>
             <i class="el-icon-circle-close" @click="deleteSubItem(item.field,i)"></i> 
           </div>
@@ -23,7 +23,7 @@
         <div v-else>
           <div v-for="(value,key) in resume[item.field]" class="line">
             <label>{{$t(`${item.field}.${key}`)}}</label>
-            <el-input @input="inputResume(`${item.field}.${key}`,$event)" placeholder="请输入内容" :value="resume[item.field][key]" @focus="loginOrNot()" @blur="$store.dispatch('saveResume')"></el-input>
+            <el-input @input="inputResume(`${item.field}.${key}`,$event)" placeholder="请输入内容" :value="resume[item.field][key]" @focus="loginOrNot()" @blur="saveResume()"></el-input>
           </div>
         </div>
       </li>
@@ -65,6 +65,11 @@ export default {
           type: 'warning'
         });
      }   
+    },
+    saveResume(){
+      if(this.$store.state.user.userID){
+        this.$store.dispatch('saveResume')
+      }
     }
   }
 }
